@@ -1,0 +1,26 @@
+services:
+    laravel-docker:
+        container_name: finance-web
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        volumes:
+            - '.:/var/www/html'
+            - '/var/www/html/vendor'
+            - '/var/www/html/node_modules'
+        ports:
+            - '${APP_PORT:-8000}:8000'
+    mysql:
+        image: mysql:8.0
+        container_name: finance-db
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "${DB_PORT:-3306}:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+volumes:
+    dbdata:
