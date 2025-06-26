@@ -29,19 +29,48 @@
             </thead>
             <tbody>
                 @foreach ($transactions as $transaction)
-                    <tr class="border-b">
-                        <td class="px-4 py-2">{{ $transaction->type }}</td>
-                        <td class="px-4 py-2">{{ $transaction->category }}</td>
-                        <td class="px-4 py-2">{{ $transaction->amount }}</td>
-                        <td class="px-4 py-2">{{ $transaction->description }}</td>
-                        <td class="px-4 py-2">{{ $transaction->date }}</td>
-                        <td class="px-4 py-2 flex gap-2">
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3">{{ $transaction->type }}</td>
+                        <td class="px-4 py-3">{{ $transaction->category }}</td>
+                        <td class="px-4 py-3">{{ $transaction->amount }}</td>
+                        <td class="px-4 py-3">{{ $transaction->description }}</td>
+                        <td class="px-4 py-3">{{ $transaction->date }}</td>
+                        <td class="px-4 py-3 flex gap-2">
                             <a href="{{ route('transactions.edit', $transaction->id) }}" class="text-blue-500">Edit</a>
                             <form action="{{ route('transactions.destroy', $transaction->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500">Delete</button>
                             </form>
+                            <button type="button" onclick="showTransactionDetails({{ $transaction->id }})" class="text-green-500 hover:text-green-700 transition-colors">View Details</button>
+                            
+                            <!-- Modal -->
+                            <div id="modal-{{ $transaction->id }}" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+                                <div class="bg-white p-6 rounded-lg shadow-xl max-w-lg w-full">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="text-lg font-bold">Transaction Details</h3>
+                                        <button onclick="closeModal({{ $transaction->id }})" class="text-gray-500 hover:text-gray-700">&times;</button>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <p><span class="font-semibold">Type:</span> {{ $transaction->type }}</p>
+                                        <p><span class="font-semibold">Category:</span> {{ $transaction->category }}</p>
+                                        <p><span class="font-semibold">Amount:</span> {{ $transaction->amount }}</p>
+                                        <p><span class="font-semibold">Description:</span> {{ $transaction->description }}</p>
+                                        <p><span class="font-semibold">Date:</span> {{ $transaction->date }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                function showTransactionDetails(id) {
+                                    document.getElementById('modal-' + id).classList.remove('hidden');
+                                }
+                                
+                                function closeModal(id) {
+                                    document.getElementById('modal-' + id).classList.add('hidden');
+                                }
+                            </script>
+                            
                         </td>
                     </tr>
                 @endforeach
