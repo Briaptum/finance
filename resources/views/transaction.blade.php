@@ -17,7 +17,7 @@
     </header>
 
     <section class="py-8 bg-gray-100 h-screen">
-        <table class="table-auto w-full mx-auto max-w-6xl bg-white rounded-lg shadow-md overflow-hidden">
+        <table class="table-auto w-full mx-auto max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
             <thead class="bg-gray-100 text-left border-b">
                 <tr class="text-sm text-gray-500">
                     <th class="px-4 py-2">Type</th>
