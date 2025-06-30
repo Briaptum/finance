@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="bg-blue-500 text-white p-4 rounded-b-lg">
-        <div class="flex justify-between items-center mx-auto max-w-4xl">
+        <div class="flex justify-between items-center mx-auto max-w-6xl">
             <h1 class="text-2xl font-bold">Trackance</h1>
             <a href="{{ route('transactions.create') }}" class="bg-white text-blue-500 p-2 rounded-md">Create Transaction</a>
             <a href="{{ route('dashboard') }}" class="bg-white text-blue-500 p-2 rounded-md">go to dashboard</a>
@@ -17,7 +17,7 @@
     </header>
 
     <section class="py-8 bg-gray-100 h-screen">
-        <table class="table-auto w-full mx-auto max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
+        <table class="table-auto w-full mx-auto max-w-6xl bg-white rounded-lg shadow-md overflow-hidden">
             <thead class="bg-gray-100 text-left border-b">
                 <tr class="text-sm text-gray-500">
                     <th class="px-4 py-2">Type</th>
