@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite('resources/css/app.css')
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header class="bg-blue-500 text-white p-4">
+    <header class="bg-blue-500 text-white p-4 rounded-b-lg">
         <div class="flex justify-between items-center mx-auto max-w-4xl">
             <h1 class="text-2xl font-bold">Trackance</h1>
             <a href="{{ route('transactions.create') }}" class="bg-white text-blue-500 p-2 rounded-md">Create Transaction</a>
+            <a href="{{ route('dashboard') }}" class="bg-white text-blue-500 p-2 rounded-md">go to dashboard</a>
         </div>
     </header>
 
     <section class="py-8 bg-gray-100 h-screen">
-        <table class="table-auto w-full mx-auto max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
+        <table class="table-auto w-full mx-auto max-w-6xl bg-white rounded-lg shadow-md overflow-hidden">
             <thead class="bg-gray-100 text-left border-b">
                 <tr class="text-sm text-gray-500">
                     <th class="px-4 py-2">Type</th>
@@ -76,6 +77,14 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-8 p-6 bg-white rounded-lg shadow-md max-w-6xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4 text-gray-500">Summary</h2>
+            <h3 class="text-lg font-bold mb-4 text-blue-500">Total Balance: {{ $totalBalance }}$</h3>
+            <h3 class="text-lg font-bold mb-4 text-green-500">Total Income: {{ $totalIncome }}$</h3>
+            <h3 class="text-lg font-bold mb-4 text-red-500">Total Expense: {{ $totalExpense }}$</h3>
+        </div>
     </section>
+    
 </body>
 </html>

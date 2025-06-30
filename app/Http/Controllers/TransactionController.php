@@ -13,7 +13,10 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = auth()->user()->transactions()->latest()->get();
-        return view('transaction', compact('transactions'));
+        $totalIncome = auth()->user()->transactions()->where('type', 'income')->sum('amount');
+        $totalExpense = auth()->user()->transactions()->where('type', 'expense')->sum('amount');
+        $totalBalance = $totalIncome - $totalExpense;
+        return view('transaction', compact('transactions', 'totalIncome', 'totalExpense', 'totalBalance'));
     }
     
     public function create()

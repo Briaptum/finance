@@ -1,0 +1,8 @@
+- Show current month’s total income, total expense, and balance.
+
+- income: showing the receiving money
+- expense: how much you spend
+- balance: how much money you have
+
+ - month's total income = income + income
+ - month’s total expense = expense + expense
