@@ -84,6 +84,61 @@
             <h3 class="text-lg font-bold mb-4 text-green-500">Total Income: {{ $totalIncome }}$</h3>
             <h3 class="text-lg font-bold mb-4 text-red-500">Total Expense: {{ $totalExpense }}$</h3>
         </div>
+        <section class="mt-8 p-6 bg-white rounded-lg shadow-md max-w-6xl mx-auto">
+        <h2 class="text-2xl font-bold mb-4 text-gray-500">Transaction Graph</h2>
+        <div class="w-full h-96">
+            <canvas id="transactionChart"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const transactions = @json($transactions);
+            
+            // Process data for chart
+            const dates = transactions.map(t => t.date);
+            const incomeData = transactions.filter(t => t.type === 'income').map(t => t.amount);
+            const expenseData = transactions.filter(t => t.type === 'expense').map(t => t.amount);
+
+            // Create chart
+            const ctx = document.getElementById('transactionChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Income',
+                        data: incomeData,
+                        borderColor: '#10B981', // green-500
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Expense',
+                        data: expenseData,
+                        borderColor: '#EF4444', // red-500
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount ($)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </section>
     </section>
     
 </body>
